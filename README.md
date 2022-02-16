@@ -30,7 +30,7 @@ Se plantearon los diferentes métodos de identificación de sistemas dinámicos 
 
 - Método de identificación de la tangente de Ziegler-Nichols.
 
-[img[https://latex.codecogs.com/png.image?\dpi{110} \tau = at_1+bt_2]]
+[img[https://latex.codecogs.com/png.image?\dpi{110}&space;\tau=at_1&plus;bt_2]
 
 - Método de identificación dos puntos en general.
 

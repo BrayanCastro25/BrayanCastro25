@@ -420,5 +420,7 @@ En cambio, al aplicar la perturbación en lazo cerrado, el controlador corrige i
 
 ### Diagrama de los componentes del dispositivo
 
+El diagrama de los componentes que integran a este dispositivo, se encuentran en la siguiente figura:
+
 ![Diagrama de los componentes del dispositivo](/src/diagrama-dispositivo.png)
 

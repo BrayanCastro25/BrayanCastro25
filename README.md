@@ -51,6 +51,7 @@ Estos métodos se basan en trazar una tangente en el punto de inflexión de la r
 Para calcula la constante de tiempo de la función se procede a realizar con la siguiente ecuación:
 
 ![Ecuación para calcular la constante tau](/src/ecuacion-tau.png)
+<< \tau=at_1+bt_2 >>
 
 Y para calcular el tiempo muerto del sistema se realiza con la siguiente ecuación:
 
@@ -62,12 +63,23 @@ Existe este tipo de método más estandarizado, ya que el anterior requiere real
 
 ![Método de identificación dos puntos en general](/src/metodo-identificacion-dos-puntos-general.png)
 
+Los valores de las constantes a, b, c y d, se identifican de manera general en la la siguiente tabla:
+
+![Constantes para identificación dos puntos en general](/src/constantes-metodos-dos-puntos-general.png)
 
 Por complejidad en el desarrollo del método de identificación de la tangente de Ziegler-Nichols, ya que este requiere graficar una recta tangente al punto de inflexión, en donde la exactitud del modelo depende del trazado de dicha recta. Se opta por el método de identificación de dos puntos en general.
 
-
 ### Métodos de identificación para sistemas dinámicos de segundo orden
 
+Para los sistemas dinámicos de segundo orden, se debe tener en cuenta que estos sistemas se clasifican en tres (3) tipos dependiendo del factor de amortiguamiento (ζ):
+
+#### Sistemas subamortiguados (0 < ζ < 1)
+
+En el trabajo de la [FACET UNT](https://catedras.facet.unt.edu.ar/controldeprocesos/wp-content/uploads/sites/85/2016/02/T2.1-Identificacion.pdf), se plantearon varios métodos de identificación específicamente para sistemas de segundo orden.
+
+![Identificación de sistemas subamortiguados con dos máximos sobre impulsos](/src/identificacion-sistemas-subamortiguados-dos-sobreimpulsos.png)
+
+Obteniendo las constantes de la función de transferencia 
 
 
 ![Placa electrónica para emular los múltiples sistemas de primer y segundo orden]()

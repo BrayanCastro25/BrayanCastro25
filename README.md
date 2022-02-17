@@ -297,8 +297,11 @@ Realizando el reemplazo de "s", por medio de la transformada bilineal, se obtien
 Donde:
 
 ![A0 de PID](/src/a0-pid.png)
+
 ![A1 de PID](/src/a1-pid.png)
+
 ![A2 de PID](/src/a2-pid.png)
+
 ![B0 de PID](/src/b0-pid.png)
 
 ### Ecuación recursiva síntesis directa de primer orden
@@ -311,8 +314,105 @@ Y su correspondiente ecuación recursiva es:
 
 ![Ecuación recursiva de síntesis de controlador de primer orden](/src/ecuacion-recursiva-primer-orden.png)
 
+Donde:
+
+![Valor de A síntesis directa primer orden](/src/a-sintesis-primer-orden.png)
+
+![Valor de B síntesis directa primer orden](/src/b-sintesis-primer-orden.png)
+
+![Valor de C síntesis directa primer orden](/src/c-sintesis-primer-orden.png)
 
 
+### Ecuación recursiva síntesis directa de segundo orden
+
+La función en tiempo continuo es:
+
+![Función de transferencia síntesis de controlador de segundo orden](/src/funcion-sintesis-segundo-orden.png)
+
+Donde 𝛿 es el factor de amortiguamiento deseado y 𝑊𝑜 es la frecuencia natural no amortiguada, deseada para dicho sistema de segundo orden posteriormente se calcula el controlador en tiempo discreto:
+
+![Ecuación recursiva de síntesis de controlador de segundo orden](/src/ecuacion-recursiva-segundo-orden.png)
+
+Donde:
+
+![Valor de F síntesis directa segundo orden](/src/f-sintesis-segundo-orden.png)
+
+![Valor de G síntesis directa segundo orden](/src/g-sintesis-segundo-orden.png)
+
+![Valor de H síntesis directa segundo orden](/src/h-sintesis-segundo-orden.png)
+
+![Valor de I síntesis directa segundo orden](/src/i-sintesis-segundo-orden.png)
+
+![Valor de J síntesis directa segundo orden](/src/j-sintesis-segundo-orden.png)
+
+![Valor de L síntesis directa segundo orden](/src/l-sintesis-segundo-orden.png)
+
+
+## Interfaz humano-máquina (HMI)
+
+### HMI encaragada del control del dispositivo
+
+La interfaz encargada del control del dispositivo, es la siguiente:
+
+![HMI encargada del control](/src/hmi-pantalla-control.png)
+
+### HMI encargada de visualizar las gráficas
+
+Y la otra Raspberry esta encargada de visualizar las gráficas, para su identificación del sistema dinámico y la implementación de su controlador correspondiente:
+
+![HMI encargada de la visualización](/src/hmi-pantalla-grafica.png)
+
+## Implementación del dispositivo
+
+El dispositivo emulador implementado, se puede visualizar a continuación:
+
+![Dispositivo emulador](/src/dispositivo-emulador.png)
+
+### Proceso de configuración inicial del dispositivo
+
+El dispositivo tiene tres (3) potenciometros en la parte frontal que permiten ajustar la constante de tiempo τ (Sistemas de primer orden), el factor de amortiguamiento ζ (Sistemas de segundo orden) y la ganancia del sistema K (Sistemas de primer y segundo orden). Luego se procede a seleccionar el tipo de lazo como "Abierto", ya que vamos a iniciar con el proceso de identificación del sistema. Para la selección del sistema se realiza con el interruptor que permite seleccionar el sistema de "Primer orden" o "Segundo orden" de manera opcional se pueden modificar el grosor y color de cada una de las gráficas y el fondo del gráfico, según las condiciones ambientales presentes o a gusto del usuario.
+
+### Proceso de estimulación con escalón de entrada del sistema
+
+Para la estimulación del sistema, se realiza con la ayuda de la pantalla de control del dispositivo configurando primeramente el valor del escalón que sera ingresado en la entrada del sistema, luego se presiona el botón "Iniciar" y posteriormente se aplica el setpoint con el botón "Setpoint" en la zona "Acción" y como opcional queda aplicar la perturbación al sistema, que representa el 10% del valor del setpoint. Al visualizar que el sistema converge en un valor se debe presionar el botón "Detener" que permite congelar la pantalla para su posterior identificación.
+
+### Proceso de identificación del sistema
+
+![Proceso de identificación del sistema](/src/proceso-identificacion-dispositivo.png)
+
+La pantalla encargada de visualizar las gráficas, también permite a la hora de identificar el sistema, consultar el tiempo en determinado valor por medio de un deslizador o dos (2) botones para una mejor precisión y la opción de habilitar o no el cursor.
+
+### Proceso de sintonización del controlador 
+
+El proceso de sintonización del controlador se requiere hacer de manera manual, ya que es uno de los objetivos de este dispositivo facilitar su implementación pero fortalecer académicamente al estudiante en el área de control industrial. Para este proceso, es necesario primero "Limpiar" la pantalla, luego establecer el tipo de lazo "Cerrado", el tipo de controlador requerido, con los parámetros calculados para dicho sistema y el valor del setpoint e iniciar el proceso en lazo cerrado con el botón "Iniciar", despues de iniciado el proceso se aplica el "Setpoint" y opcional la "Perturbación". Finalmente se presiona el botón "Detener".
+
+## Ejemplo de implementación del dispositivo
+
+### Implementación lazo abierto con sistema subamortiguado
+
+Ya establecidos los pasos a seguir para cada proceso, se demuestra un ejemplo con un sistema de segundo orden subamortiguado.
+
+![Ejemplo lazo abierto sistema subamortiguado](/src/ejemplo-lazo-abierto-subamortiguado.png)
+
+### Implementación pantalla de control por síntests directa para sistema subamortiguado
+
+Se establece el tipo de controlador por síntesis directa para sistema de segundo orden.
+
+![Ejemplo configuración lazo cerrado sistema subamortiguado](/src/ejemplo-configuracion-subamortiguado.png)
+
+### Implementación lazo cerrado con sistema subamortiguado
+
+Y la salida del lazo cerrado se muestra en la siguiente gráfica. En esta se pueden observar las cuatro señales "Entrada", "Salida", "Control" y "Perturbación".
+
+![Ejemplo lazo cerrado sistema subamortiguado](/src/ejemplo-lazo-cerrado-subamortiguado.png)
+
+### Implementación de sistema subamortiguado en lazo abierto frente a perturbaciones
+
+![Ejemplo lazo abierto sistema subamortiguado frente a perturbaciones](/src/lazo-abierto-subamortiguado-perturbaciones.png)
+
+### Implementación de sistema subamortiguado en lazo cerrado frente a perturbaciones
+
+![Ejemplo lazo cerrado sistema subamortiguado frente a perturbaciones](/src/lazo-cerrado-subamortiguado-perturbaciones.png)
 
 
 ![Placa electrónica para emular los múltiples sistemas de primer y segundo orden]()

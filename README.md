@@ -164,6 +164,12 @@ Obteniendo el valor de la relación, se procede a buscar en la siguiente tabla e
 
 De la tabla anterior se obtienen el valor de 𝜻 y Wnt4 requerido para la identificación de la frecuencia natural 𝑊𝑛:
 
-![](src/)
+![Calculo Wn sobrepicos con poco valor](/src/calculo-wn-sobrepicos-poco-valor.png)
+
+- Respuestas de sistemas sobre amortiguados (𝜻 > 𝟐).
+
+![Método RIvero sobreamortiguados](/src/metodo-rivero-sobreamortiguados.png)
+
+
 
 ![Placa electrónica para emular los múltiples sistemas de primer y segundo orden]()

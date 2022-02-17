@@ -51,7 +51,6 @@ Estos métodos se basan en trazar una tangente en el punto de inflexión de la r
 Para calcula la constante de tiempo de la función se procede a realizar con la siguiente ecuación:
 
 ![Ecuación para calcular la constante tau](/src/ecuacion-tau.png)
-<< \tau=at_1+bt_2 >>
 
 Y para calcular el tiempo muerto del sistema se realiza con la siguiente ecuación:
 
@@ -73,13 +72,98 @@ Por complejidad en el desarrollo del método de identificación de la tangente d
 
 Para los sistemas dinámicos de segundo orden, se debe tener en cuenta que estos sistemas se clasifican en tres (3) tipos dependiendo del factor de amortiguamiento (ζ):
 
-#### Sistemas subamortiguados (0 < ζ < 1)
+- Sistemas subamortiguados (0 < ζ < 1).
+- Sistemas criticamente amortiguados (ζ = 1).
+- Sistemas sobreamortiguados (ζ > 1).
+
+#### Sistemas subamortiguados con máximos sobreimpulsos
 
 En el trabajo de la [FACET UNT](https://catedras.facet.unt.edu.ar/controldeprocesos/wp-content/uploads/sites/85/2016/02/T2.1-Identificacion.pdf), se plantearon varios métodos de identificación específicamente para sistemas de segundo orden.
 
 ![Identificación de sistemas subamortiguados con dos máximos sobre impulsos](/src/identificacion-sistemas-subamortiguados-dos-sobreimpulsos.png)
 
-Obteniendo las constantes de la función de transferencia 
+Obteniendo las constantes de identificación, se procede a calcular los parametros que representan a la función de transferencia:
 
+![Calculo RA de máximos sobre impulsos](/src/calculo-ra-subamortiguado.png)
+
+Obtenido el valor de 𝑅𝐴, se calcula el factor de amoriguamiento, con la siguiente ecuación:
+
+![Calculo zeta de máximos sobre impulsos](/src/calculo-zeta-subamortiguado.png)
+
+La frecuencia de oscilación, se obtiene:
+
+![Calculo frecuencia de oscilación con máximos sobre impulsos](/src/calculo-wd-subamortiguado.png)
+
+Ya obtenida 𝑊𝑑 se puede despejar la frecuencia natural del sistema 𝑊𝑛:
+
+![Calculo frecuencia natural con máximos sobre impulsos](/src/calculo-wn-subamortiguado.png)
+
+#### Método Smith
+
+Este método se utiliza para identificar tanto en sistemas subamortiguados o sobre amortiguados, para ello se requiere ubicar el tiempo en dos puntos 20% y 60%. 
+
+Donde 𝑊𝑛 se halla con la ecuación:
+
+![Calculo wn método smith](/src/calculo-wn-smith.png)
+
+En la siguiente gráfica, se aprecia que la relación entre los dos puntos son los que ayudan a obtener 𝑊𝑛 y ζ. Una limitante a tener en cuenta es el máximo factor de amortiguamiento a hallar es de ζ = 5.
+
+![Método Smith segundo orden](/src/metodo-smith-segundo-orden.png)
+
+#### Identificación sistema sobre amortiguado (Tratamiento de datos experimentales)
+
+En el artículo web de [Weingaunity](https://hackaday.io/page/4829-identification-of-a-damped-pt2-system), identifica con gran precisión los parámetros 𝜁 y 𝑊𝑛 para sistemas sobre amortiguados, solo con obtener los tiempos en donde la salida llega a su 25% 𝑦 75% de la salida máxima, como se aprecia en la figura.
+
+![Método de identificación Weingaunity](/src/metodo-identificacion-weingaunity.png)
+
+Se requiere hallar los valores de 𝑇1 y 𝑇2, por medio de la siguiente serie de ecuaciones:
+
+![Calculo relación r de Weingaunity](/src/calculo-r-weingaunity.png)
+
+![Calculo parámetro p de Weingaunity](/src/calculo-p-weingaunity.png)
+
+![Calculo parámetro x de Weingaunity](/src/calculo-x-weingaunity.png)
+
+![Calculo parámetro T2 de Weingaunity](/src/calculo-t2-weingaunity.png)
+
+![Calculo parámetro T1 de Weingaunity](/src/calculo-t1-weingaunity.png)
+
+Finalmente, se hallan los valores de 𝑊𝑛 y ζ:
+
+![Calculo Wn con método Weingaunity](/src/calculo-wn-weingaunity.png)
+
+![Calculo zeta con método Weingaunity](/src/calculo-zeta-weingaunity.png)
+
+En el trabajo presentado por Roberto Rivero 20 , argumenta la identificación de los sistemas de segundo orden. Por medio de otro tipo de clasificación, no el comúnmente conocido (subamortiguado, críticamente amortiguado y sobre amortiguado). Sino la presentada a continuación:
+
+- Respuestas de sistemas oscilantes con sobre picos significativos (𝜻 < 𝟎.𝟓)
+
+Estos sistemas se caracterizan por su fácil identificación de los dos primeros sobre impulsos.
+
+![Método rivero sobre impulsos significativos](/src/metodo-rivero-sobreimpulsos-significativos.png)
+
+Los parámetros que caracterizan se calculan de la siguiente manera:
+
+![Calculo parámetro zeta por Rivero](/src/calculo-zeta-rivero.png)
+
+![Calculo parámetro wn por Rivero](/src/calculo-wn-rivero.png)
+
+- Respuestas de sistemas sin sobre picos o con sobre picos de poco valor (𝟎. 𝟓 ≤ 𝜻 ≤ 𝟐)
+
+Para este grupo de sistemas, la identificación se rige por la toma de medida de los tiempos en los puntos determinados.
+
+![Método rivero sobre impulsos de poco valor](/src/metodo-rivero-sobrepicos-poco-valor.png)
+
+Se debe hallar la relación entre el t4 y t3:
+
+![Relación entre t4 y t3](/src/relacion-t4-t3-rivero.png)
+
+Obteniendo el valor de la relación, se procede a buscar en la siguiente tabla el valor (si el valor obtenido no se aproxima a ninguno de los establecidos, se puede realizar una interpolación para tener mayor precisión):
+
+![Tabla relación t4 y t3](/src/tabla-rivero-sobrepicos-poco-valor.png)
+
+De la tabla anterior se obtienen el valor de 𝜻 y Wnt4 requerido para la identificación de la frecuencia natural 𝑊𝑛:
+
+![](src/)
 
 ![Placa electrónica para emular los múltiples sistemas de primer y segundo orden]()

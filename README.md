@@ -408,11 +408,13 @@ Y la salida del lazo cerrado se muestra en la siguiente gráfica. En esta se pue
 
 ### Implementación de sistema subamortiguado en lazo abierto frente a perturbaciones
 
+Al aplicar la perturbación se aprecia como la salida del sistema oscila y aumenta su valor estacionario, ya que al no estar configurada como lazo cerrado, no permite corregir este imprevisto en el sistema.
+
 ![Ejemplo lazo abierto sistema subamortiguado frente a perturbaciones](/src/lazo-abierto-subamortiguado-perturbaciones.png)
 
 ### Implementación de sistema subamortiguado en lazo cerrado frente a perturbaciones
 
+En cambio, al aplicar la perturbación en lazo cerrado, el controlador corrige inmediatamente esta entrada exterior evitando que cambie el valor estacionario.
+
 ![Ejemplo lazo cerrado sistema subamortiguado frente a perturbaciones](/src/lazo-cerrado-subamortiguado-perturbaciones.png)
 
-
-![Placa electrónica para emular los múltiples sistemas de primer y segundo orden]()

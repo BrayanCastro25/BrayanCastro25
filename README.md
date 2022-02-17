@@ -170,6 +170,149 @@ De la tabla anterior se obtienen el valor de 𝜻 y Wnt4 requerido para la ident
 
 ![Método RIvero sobreamortiguados](/src/metodo-rivero-sobreamortiguados.png)
 
+## Sintonización de controladores
+
+A continuación, se disponen de los siguientes métodos para la sintonización de controladores.
+
+### Sintonización de controladores PID para sistemas de primer orden
+
+#### Primer método PID Ziegler & Nichols
+
+La función de transferencia que representa a un controlador PID es la siguiente:
+
+![Función de transferencia PID](/src/funcion-transferencia-pid.png)
+
+![Constante Ki del PID](/src/constante-ki-pid.png)
+
+![Constante Kd del PID](/src/constante-kd-pid.png)
+
+Las constantes para el controlador Ziegler & Nichols, se halla con la siguiente tabla:
+
+![Parámetros del controlador PID por Ziegler & Nichols](/src/parametros-pid-z&n.png)
+
+#### Controlador PID mediante criterio Cohen Coon
+
+Tiene el mismo criterio y procedimiento que el método Ziegler-Nichols variando cada una de las constantes del controlador.
+
+![Parámetros del controlador PID por Cohen Coon](/src/parametros-pid-cohen-coon.png)
+
+### Sintonización de controlador por síntesis directa para sistemas de primer y segundo orden
+
+Este método es interesante, ya que a partir del diagrama de bloques de lazo cerrado se establece la función de transferencia para a partir de esta, poder elegir el comportamiento que se desee a la salida del sistema y obtener el controlador que requiere para dicho objetivo.
+
+![Representacion lazo cerrado de síntesis directa](/src/representacion-lazo-cerrado-sintesis-directa.png)
+
+Donde:
+
+𝐶(𝑠): Función de transferencia del controlador.
+𝐹(𝑠): Función de transferencia del sistema o proceso.
+𝐺𝐿𝐶(𝑠): Función de transferencia del comportamiento del lazo cerrado.
+
+La función de transferencia que se obtiene a la salida del lazo cerrado es:
+
+![Función de transferencia del lazo cerrado por síntesis directa](/src/funcion-transferencia-lazo-cerrado.png)
+
+La función de transferencia que requiere el controlador para cumplir el comportamiento deseado, es la siguiente:
+
+![Función de transferencia del controlador síntesis directa](/src/funcion-transferencia-sintesis-directa.png)
+
+## Diseño e implementación de placa electrónica emuladora de sistemas dinámicos
+
+### Circuito sistemas dinámicos de primer orden
+
+![Primer circuito sistemas primer orden](/src/primer-circuito-primer-orden.png)
+
+Con este primer circuito se percibe el cambio en el 𝜏 pero modifica a la misma vez la ganancia del sistema, por este último motivo se decide probar otro circuito. Ya que la modificación de la ganancia se planea implementar con un circuito independiente que ajuste este parámetro para los dos sistemas.
+
+Por ese motivo es necesario el circuito a continuación propuesto:
+
+![Circuito final para sistemas primer orden](/src/circuito-final-primer-orden.png)
+
+### Circuito sistemas dinpamicos de segundo orden
+
+Para el sistema de segundo orden, se analiza el circuito filtro pasa bajas Sallen Key que fue implementado por Escobar Víctor y Arévalo Jerson.
+
+![Circuito filtro Sallen Key de segundo orden](/src/circuito-filtro-sallen-key-segundo-orden.png)
+
+Mediante las gráficas que se obtuvieron en la implementación del circuito se observa que el comportamiento de este circuito alcanza a presentar un sobre impulso es decir un sistema subamortiguado, pero debido a que se quiere representar varios sistemas para ponerlos en práctica. Se buscaron alternativas encontrando esta interesante implementación en la tesis de [Morales](https://repositorio.usm.cl/bitstream/handle/11673/46104/3560901064284UTFSM.pdf?sequence=1), donde se presentó un módulo interactivo para control de procesos.
+
+![Circuito final sistemas de segundo orden](/src/circuito-final-segundo-orden.png)
+
+## Diagrama de bloques implementación sistema completo
+
+La placa electrónica fue diseñada con la herramienta KiCAD
+
+![PCB en KiCAD](/src/circuito-en-kicad.png)
+
+Y el diagrama de bloques que permite saber la configuración de todo el sistema se encuentra, a continuación:
+
+![Diagrama del sistema completo](/src(diagrama-sistema-completo.png)
+
+## Periodo de muestreo
+
+### Periodo de muestreo sistemas de primer orden
+
+Para estos tipos de sistemas se tiene que la frecuencia máxima es la inversa de la constante de tiempo.
+
+![Frecuencia máxima sistemas de primer orden](frecuencia-maxima-primer-orden.png)
+
+Donde 𝜏, se obtiene de la identificación, La frecuencia de Nyquist debe cumplir la inecuación:
+
+![Frecuencia de Nyquist](/src/frecuencia-nyquist.png)
+
+Y el periodo de muestreo finalmente es:
+
+![Periodo de muestreo sistema primer orden](/src/periodo-muestreo-primer-orden.png)
+
+### Periodo de muestreo sistemas de segundo orden
+
+Para el periodo de muestreo de los sistemas de segundo orden, es necesario hallar el 𝜏 equivalente.
+
+#### Constante de tiempo 𝜏 sistemas subamortiguados (𝜻 < 𝟏)
+
+![Tau equivalente sistemas subamortiguados](/src/tau-equivalente-subamortiguado.png)
+
+#### Constante de tiempo 𝜏 sistemas sobre amortiguados (𝜻 > 𝟏)
+
+![Tau equivalente sistemas sobre amortiguados](/src/tau-equivalente-sobreamortiguado.png)
+
+Lo que quiere decir que esos 𝜏𝑒𝑞 , operan de igual manera que él 𝜏 del sistema de primer orden.
+
+## Ecuación recursiva
+
+Con la ayuda de la transformada bilineal se puede llevar del tiempo continuo “s” al tiempo discreto “z”. Con la siguiente igualdad:
+
+![Transformada bilineal](/src/transformada-bilineal.png)
+
+### Ecuación recursiva controlador PID
+
+Se parte de la ecuación del controlador en tiempo continuo "s":
+
+![Función de transferencia PID](/src/funcion-transferencia-pid.png)
+
+Realizando el reemplazo de "s", por medio de la transformada bilineal, se obtiene:
+
+![Ecuación recursiva controlador PID](/src/ecuacion-recursiva-pid.png)
+
+Donde:
+
+![A0 de PID](/src/a0-pid.png)
+![A1 de PID](/src/a1-pid.png)
+![A2 de PID](/src/a2-pid.png)
+![B0 de PID](/src/b0-pid.png)
+
+### Ecuación recursiva síntesis directa de primer orden
+
+La función en tiempo continuo es:
+
+![Función de transferencia síntesis de controlador de primer orden](/src/funcion-sintesis-primer-orden.png)
+
+Y su correspondiente ecuación recursiva es:
+
+![Ecuación recursiva de síntesis de controlador de primer orden](/src/ecuacion-recursiva-primer-orden.png)
+
+
+
 
 
 ![Placa electrónica para emular los múltiples sistemas de primer y segundo orden]()

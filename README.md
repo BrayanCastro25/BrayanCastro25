@@ -1,4 +1,5 @@
-# Proyecto realizado en tesis de Ingeniero en Mecatrónica
+# Dispositivo portátil emulador de dinámicas de procesos de primer y segundo orden para su identificación y correspondiente sintonización del controlador.
+
 
 El objetivo de este proyecto, fue integrar en un solo dispositivo, el proceso de identificación de múltiples sistemas dinámicos de primer y segundo orden (Emulados mediante amplificadores operacionales) y el proceso de sintonización de controladores PID clásico y/o avanzados. En este proyecto se hizo necesario el uso de los siguientes dispositivos (Hardware) y diferentes Software.
 
@@ -41,17 +42,26 @@ Se plantearon los diferentes métodos de identificación de sistemas dinámicos 
 
 ### Métodos de identificación para sistemas dinámicos de primer orden 
 
-- Método de identificación de la tangente de Ziegler-Nichols.
+#### Método de identificación de la tangente de Ziegler-Nichols.
+ 
+Estos métodos se basan en trazar una tangente en el punto de inflexión de la respuesta de salida del sistema. La constante de tiempo del sistema 𝜏 por este método se calcula desde donde inicia la tangente hasta donde finaliza, es decir, donde se cruza con el valor 𝑦 = 0 y 𝑦 = 𝑦𝑚á𝑥. La ganancia estática del sistema es la fracción entre la diferencia de salida y la diferencia de entrada del sistema. Por último, el 𝑡 𝑜 es el tiempo que hay entre el inicio del escalón y el inicio de la tangente.
 
 ![Método de identificación de la tangente de Ziegler-Nichols](/src/metodo-identificacion-Z&N.png)
 
-<img src="https://latex.codecogs.com/png.image?\dpi{110}&space;\tau=at_1&plus;bt_2" title="\tau=at_1+bt_2" />
+Para calcula la constante de tiempo de la función se procede a realizar con la siguiente ecuación:
 
-- Método de identificación dos puntos en general.
+![Ecuación para calcular la constante tau](/src/ecuacion-tau.png)
+
+Y para calcular el tiempo muerto del sistema se realiza con la siguiente ecuación:
+
+![Ecuación para calcular el tiempo muerto](/src/ecuacion-to.png)
+
+#### Método de identificación dos puntos en general.
+
+Existe este tipo de método más estandarizado, ya que el anterior requiere realizar una recta tangente al punto de inflexión, en donde la exactitud del modelo depende del trazado de dicha recta, este tipo de método permite la identificación de parámetros por medio de dos puntos que se especifican por medio de porcentajes de la señal de salida.
 
 ![Método de identificación dos puntos en general](/src/metodo-identificacion-dos-puntos-general.png)
 
-<img src="https://latex.codecogs.com/png.image?\dpi{110}&space;t_o=ct_1&plus;dt_2" title="t_o=ct_1+dt_2" />
 
 Por complejidad en el desarrollo del método de identificación de la tangente de Ziegler-Nichols, ya que este requiere graficar una recta tangente al punto de inflexión, en donde la exactitud del modelo depende del trazado de dicha recta. Se opta por el método de identificación de dos puntos en general.
 

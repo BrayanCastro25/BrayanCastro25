@@ -418,3 +418,7 @@ En cambio, al aplicar la perturbación en lazo cerrado, el controlador corrige i
 
 ![Ejemplo lazo cerrado sistema subamortiguado frente a perturbaciones](/src/lazo-cerrado-subamortiguado-perturbaciones.png)
 
+### Diagrama de los componentes del dispositivo
+
+![Diagrama de los componentes del dispositivo](/src/diagrama-dispositivo.png)
+
